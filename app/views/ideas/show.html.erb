@@ -1,0 +1,30 @@
+<div class="container">
+  <h2 class="center">IdeaBox 2.0</h1>
+  <div id="search-box">
+    <div class="row">
+      <div class="col s4">
+          <%= label_tag(:title, "Ex. Invisible bike", class: 'title-label' ) %>
+          <%= text_field_tag(:title, nil, class: "title-input") %>
+      </div>
+      <div class="col s8">
+          <%= label_tag(:body, "Ex. A bike for an invisible person", class: 'body-label' ) %>
+          <%= text_field_tag(:body, nil, class: "body-input") %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s3 offset-s5">
+          <%= submit_tag("Create", id: "create_button", class: "btn blue-grey address-search") %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <h3 class="center">Ideas List</h3>
+  <div class="row">
+    <div class="col s6">
+      <div id="individual-idea-box"></div>
+    </div>
+    <div class="col s6"></div>
+  </div>
+</div>
