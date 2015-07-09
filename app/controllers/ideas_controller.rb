@@ -2,7 +2,8 @@ class IdeasController < ApplicationController
   respond_to :json
 
   def index
-    respond_with Idea.all
+    @ideas = Idea.all.each { |idea| idea.body = idea.truncate  }
+    respond_with @ideas.reverse
   end
 
   def show
@@ -13,16 +14,36 @@ class IdeasController < ApplicationController
   end
 
   def update
-    respond_with Idea.update(params[:id], idea_params)
+    Idea.update(params[:id].to_i, idea_params)
+    redirect_to "/"
   end
 
   def destroy
     respond_with Idea.destroy(params[:id])
   end
 
+  def edit
+    @idea = Idea.find(params["id"])
+  end
+
+  def thumbsup
+    @idea = Idea.find(params[:id])
+    @idea.up
+    @idea.save
+    respond_with @idea
+  end
+
+
+  def thumbsdown
+    @idea = Idea.find(params[:id])
+    @idea.down
+    @idea.save
+    respond_with @idea
+  end
+
   private
 
   def idea_params
-      params.require(:idea).permit(:title, :body)
+      params.require(:idea).permit(:title, :body, :quality_id)
   end
 end
